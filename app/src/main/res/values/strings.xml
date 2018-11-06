@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">WanApp</string>
+
+    <string name="pre_btn_desc">向前</string>
+    <string name="finish_btn_desc">结束</string>
+    <string name="section_1">在这里，你可以得到很多高质量的文章</string>
+    <string name="intro_1">包括多种文章。如Gradle，Component，JNI等</string>
+    <string name="section_2">我们每天更新文章</string>
+    <string name="intro_2">接触最新的理论</string>
+    <string name="section_3">一个新的世界正在等你</string>
+    <string name="intro_3">探索未知，此时此刻</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="login_account_hint_text">请输入账号</string>
+    <string name="login_password_hint_text">请输入密码</string>
+
+    <string name="login_btn_login">登录</string>
+    <string name="regist_text">注册账号</string>
+    <string name="account_error">账号为空请输入账号</string>
+    <string name="password_error">密码小于6位，请输入正确密码</string>
+    <string name="network_error">网络异常</string>
+    <string name="register_title">注册账号</string>
+    <string name="to_login_text">已有账号，直接登录</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">设置</string>
+    <string name="action_logout">退出</string>
+    <string name="positive_button">确定</string>
+    <string name="negative_button">取消</string>
+    <string name="loading">加载中</string>
+    <string name="dialog_title">提示</string>
+    <string name="quit_message">是否退出登录？</string>
+    <string name="nav_main">主页</string>
+    <string name="nav_guide">导航</string>
+    <string name="nav_knowledge">知识体系</string>
+    <string name="nav_project">项目</string>
+    <string name="action_search">搜索</string>
+    <string name="empty_text">列表为空</string>
+    <string name="home_label">主页</string>
+    <string name="detail_collect_article">收藏文章</string>
+    <string name="detail_copy_the_link">复制链接</string>
+    <string name="detail_share">分享</string>
+    <string name="detail_open_in_system_browser">在浏览器中打开</string>
+    <string name="no_browser_found">未找到浏览器</string>
+    <string name="no_activity_found">未找到应用</string>
+    <string name="share_to">分享给</string>
+    <string name="collect_article_error">收藏文章失败</string>
+    <string name="collect_article_success">收藏成功</string>
+    <string name="uncollect_article_error">取消收藏文章失败</string>
+    <string name="uncollect_article_success">取消收藏成功</string>
+</resources>
