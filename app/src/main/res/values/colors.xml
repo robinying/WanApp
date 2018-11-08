@@ -20,7 +20,11 @@
     <color name="pink_500">#E91E63</color>
     <color name="green_c1">#00F4C1</color>
 
-    <color name="gray">#fafafa</color>
+    <color name="gray">#A5A5A5</color>
     <color name="button_bg_press_color">#A7B4BD</color>
     <color name="colorNavItemUnselected">#A5A5A5</color>
+
+    <color name="text_color">#780A0A0A</color>
+
+    <color name="colorHeaderBackground">#ebebeb</color>
 </resources>

@@ -39,6 +39,8 @@ public interface HomeContract {
 
         void showAutoLoginFail();
 
+        void jumpToTop();
+
 
     }
 }

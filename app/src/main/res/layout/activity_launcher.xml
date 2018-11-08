@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".activity.LauncherActivity">
+
+
+
+    <ImageView
+        android:id="@+id/splash_pic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_splash_pic"/>
+
+    <com.yubin.wanapp.view.CountDownView
+        android:id="@+id/countdown"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        app:text="跳过"
+        app:text_color="@android:color/white"
+        app:text_size="13dp"
+        app:update_time="500"
+        app:total_time="3000"
+        app:bg_color="#FFC107"
+        app:progress_width="2dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="300dp"
+        app:progress_hint_color="#94595b59"/>
+
+</RelativeLayout>

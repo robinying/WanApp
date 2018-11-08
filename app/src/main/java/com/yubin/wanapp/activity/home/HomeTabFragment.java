@@ -64,9 +64,7 @@ public class HomeTabFragment extends BaseFragment implements HomeContract.View{
     private boolean isFirstLoad=true;
     private LinearLayoutManager layoutManager;
 
-    public HomeTabFragment() {
 
-    }
 
     public static HomeTabFragment newInstance(){
         return new HomeTabFragment();
@@ -76,7 +74,7 @@ public class HomeTabFragment extends BaseFragment implements HomeContract.View{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new HomePresenter(this, LoginDataGetSource.getInstance(), GetRemoteBannerData.getInstance(), GetArticlesData.getInstance());
+
     }
 
     @Override
@@ -120,6 +118,7 @@ public class HomeTabFragment extends BaseFragment implements HomeContract.View{
     @Override
     protected void initView(View root) {
         super.initView(root);
+        new HomePresenter(this,GetRemoteBannerData.getInstance(),GetArticlesData.getInstance());
         mBanner = (Banner) getActivity().getLayoutInflater().inflate(R.layout.banner_header, null);
         mBanner.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getContext().getResources().getDisplayMetrics().heightPixels/4));
@@ -161,17 +160,19 @@ public class HomeTabFragment extends BaseFragment implements HomeContract.View{
 
     @Override
     public boolean isActive() {
-        return true;
+        return isAdded() && isResumed();
     }
 
     @Override
     public void setLoadingIndicator(final boolean isActive) {
-        refreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                refreshLayout.setRefreshing(isActive);
-            }
-        });
+        if(refreshLayout!=null) {
+            refreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    refreshLayout.setRefreshing(isActive);
+                }
+            });
+        }
     }
 
     @Override
@@ -211,8 +212,12 @@ public class HomeTabFragment extends BaseFragment implements HomeContract.View{
 
     @Override
     public void showEmptyView(boolean toShow) {
-        emptyView.setVisibility(toShow ? View.VISIBLE : View.INVISIBLE);
-        nestedScrollView.setVisibility(!toShow ? View.VISIBLE : View.INVISIBLE);
+        if(emptyView !=null) {
+            emptyView.setVisibility(toShow ? View.VISIBLE : View.INVISIBLE);
+        }
+        if(nestedScrollView !=null) {
+            nestedScrollView.setVisibility(!toShow ? View.VISIBLE : View.INVISIBLE);
+        }
     }
 
     @Override
@@ -262,6 +267,10 @@ public class HomeTabFragment extends BaseFragment implements HomeContract.View{
 
     }
 
+    @Override
+    public void jumpToTop() {
+        nestedScrollView.scrollTo(0,0);
+    }
 
 
     private void loadMore(){

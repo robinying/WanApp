@@ -57,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity implements LoginContract
     @Override
     public void saveUserData(LoginDetailData loginDetailData) {
         userDataDao.deleteAll();
+        loginDetailData.setStorePassword(rgPassword.getText().toString());
         userDataDao.insertOrReplaceInTx(loginDetailData);
         jumpToMain();
     }
@@ -64,6 +65,11 @@ public class RegisterActivity extends AppCompatActivity implements LoginContract
     @Override
     public void showNetworkError() {
         ToastUtil.makeText(R.string.network_error);
+    }
+
+    @Override
+    public void showAutoLogin() {
+
     }
 
     @Override

@@ -9,7 +9,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,9 +22,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.FragmentUtils;
 import com.yubin.wanapp.R;
+import com.yubin.wanapp.activity.guide.GuideFragment;
 import com.yubin.wanapp.activity.home.HomeTabFragment;
 import com.yubin.wanapp.activity.login.LoginActivity;
+import com.yubin.wanapp.activity.search.SearchActivity;
 import com.yubin.wanapp.data.UserManager;
 import com.yubin.wanapp.util.DialogHelper;
 
@@ -47,14 +52,30 @@ public class MainActivity extends BaseAppCompatActivity
     private TextView mUserTv;
     private Context mContext;
     private HomeTabFragment homeTabFragment;
+    private GuideFragment guideFragment;
     private FragmentManager fragmentManager;
+    private Fragment[] mFragments =new Fragment[2];
+    private int curIndex;
 
+
+    public static void show(Context context) {
+        if (context != null) {
+            context.startActivity(new Intent(context, MainActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        curIndex = 0;
         fragmentManager = getSupportFragmentManager();
         homeTabFragment = HomeTabFragment.newInstance();
-        addFragment(R.id.frame_layout,homeTabFragment);
+        guideFragment = GuideFragment.newInstance();
+        mFragments[0] = homeTabFragment;
+        mFragments[1] = guideFragment;
+        FragmentUtils.add(getSupportFragmentManager(),mFragments, R.id.frame_layout, curIndex);
+        setTitle(R.string.home_label);
+
 
     }
 
@@ -66,15 +87,18 @@ public class MainActivity extends BaseAppCompatActivity
     @Override
     protected void initView() {
         super.initView();
-        setTitle(R.string.app_name);
+        //setTitle(R.string.home_label);
         mContext = this;
         setSupportActionBar(toolbar);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if(homeTabFragment.isActive()){
+                    homeTabFragment.jumpToTop();
+                }
+                if(guideFragment.isActive()){
+                }
             }
         });
 
@@ -101,13 +125,15 @@ public class MainActivity extends BaseAppCompatActivity
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.nav_main:
-                        replaceFragment(R.id.frame_layout,homeTabFragment);
-
+                        showCurrentFragment(0);
                         setTitle(R.string.home_label);
                         break;
                     case R.id.nav_guide:
+                        showCurrentFragment(1);
+                        setTitle(R.string.guide_label);
                         break;
                     case R.id.nav_knowledge:
+
                         break;
                     case R.id.nav_project:
                         break;
@@ -115,6 +141,10 @@ public class MainActivity extends BaseAppCompatActivity
                 return true;
             }
         });
+    }
+
+    private void showCurrentFragment(int index) {
+        FragmentUtils.showHide(curIndex = index, mFragments);
     }
 
     @Override
@@ -143,6 +173,7 @@ public class MainActivity extends BaseAppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
+            SearchActivity.show(mContext);
             return true;
         }
 
@@ -160,7 +191,8 @@ public class MainActivity extends BaseAppCompatActivity
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     UserManager.getUserManager().clearUserData();
-                    jumpToLogin();
+                    LoginActivity.show(activityInstance);
+                    finish();
                 }
             }).show();
 

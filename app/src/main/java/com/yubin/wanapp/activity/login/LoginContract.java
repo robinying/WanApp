@@ -19,12 +19,16 @@ public interface LoginContract {
 
         void showNetworkError();
 
+        void showAutoLogin();
+
     }
 
     interface Presenter extends BasePresenter {
         void check(String username, String password,String repassword, @NonNull LoginType loginType);
 
         void clearLocalData();
+
+        void autoLogin(String username, String password, @NonNull LoginType loginType);
 
     }
 

@@ -43,6 +43,7 @@
     <string name="action_search">搜索</string>
     <string name="empty_text">列表为空</string>
     <string name="home_label">主页</string>
+    <string name="guide_label">导航</string>
     <string name="detail_collect_article">收藏文章</string>
     <string name="detail_copy_the_link">复制链接</string>
     <string name="detail_share">分享</string>
@@ -54,4 +55,6 @@
     <string name="collect_article_success">收藏成功</string>
     <string name="uncollect_article_error">取消收藏文章失败</string>
     <string name="uncollect_article_success">取消收藏成功</string>
+    <string name="auto_login_success">自动登录成功</string>
+    <string name="search_tint">搜索文章</string>
 </resources>

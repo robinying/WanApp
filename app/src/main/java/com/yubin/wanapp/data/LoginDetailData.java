@@ -53,9 +53,10 @@ public class LoginDetailData {
     @Transient
     @SerializedName("collectIds")
     private List<Integer> collectIds;
+    private String storePassword;
 
-    @Generated(hash = 383158423)
-    public LoginDetailData(String email, String icon, int id, String password, String token, int type, String username) {
+    @Generated(hash = 1230219900)
+    public LoginDetailData(String email, String icon, int id, String password, String token, int type, String username, String storePassword) {
         this.email = email;
         this.icon = icon;
         this.id = id;
@@ -63,6 +64,7 @@ public class LoginDetailData {
         this.token = token;
         this.type = type;
         this.username = username;
+        this.storePassword = storePassword;
     }
 
     @Generated(hash = 1600546930)
@@ -139,5 +141,13 @@ public class LoginDetailData {
 
     public void setCollectIds(List<Integer> collectIds) {
         this.collectIds = collectIds;
+    }
+
+    public String getStorePassword() {
+        return storePassword;
+    }
+
+    public void setStorePassword(String storePassword) {
+        this.storePassword = storePassword;
     }
 }

@@ -30,14 +30,6 @@ import io.reactivex.functions.Predicate;
  */
 public class GetArticlesData implements ArticlesDataSource {
 
-    @NonNull
-    private ArticlesDataSource remoteDataSource;
-
-    private Map<Integer, ArticleDetailData> articlesCache;
-
-    private Map<Integer, ArticleDetailData> queryCache;
-
-    private Map<Integer, ArticleDetailData> categoryCache;
     private final int INDEX = 0;
     private static ArticleDetailDataDao articleDao;
 

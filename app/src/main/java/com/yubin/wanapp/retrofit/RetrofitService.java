@@ -2,6 +2,7 @@ package com.yubin.wanapp.retrofit;
 
 import com.yubin.wanapp.data.ArticleData;
 import com.yubin.wanapp.data.BannerData;
+import com.yubin.wanapp.data.GuideBean;
 import com.yubin.wanapp.data.LoginData;
 import com.yubin.wanapp.data.Status;
 
@@ -48,4 +49,11 @@ public interface RetrofitService {
     //获取收藏文章的列表
 //    @GET(Api.GET_FAVORITE_ARTICLES + "{page}/json")
 //    Observable<FavoriteArticlesData> getFavoriteArticles(@Path("page") int page);
+
+    @GET(Api.GUIDE_TREE)
+    Observable<GuideBean> getGuideData();
+
+
+
+
 }

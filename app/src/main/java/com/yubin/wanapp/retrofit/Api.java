@@ -39,4 +39,6 @@ public class Api {
 
     //获得收藏文章的列表
     public static final String GET_FAVORITE_ARTICLES = API_BASE + "lg/collect/list/";
+
+    public static final String GUIDE_TREE = API_BASE + "tree/json";
 }

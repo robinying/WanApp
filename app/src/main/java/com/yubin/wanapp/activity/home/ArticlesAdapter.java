@@ -74,7 +74,6 @@ public class ArticlesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         //if the text is too long, the button can not show it correctly.The solution is adding " ".
         normalViewHolder.btnCategory.setText("  "+data.getChapterName()+"  ");
         normalViewHolder.textTime.setText(data.getNiceDate());
-        Log.d("robin","data.getAuthor()="+data.getAuthor()+"   data.getChapterName() ="+data.getChapterName()+" data.getNiceDate() ="+data.getNiceDate());
     }
 
     private int getRealPosition(int position) {

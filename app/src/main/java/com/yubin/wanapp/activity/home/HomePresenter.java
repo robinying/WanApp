@@ -26,24 +26,19 @@ import io.reactivex.schedulers.Schedulers;
 public class HomePresenter implements HomeContract.Presenter {
     private HomeContract.View mView;
     @NonNull
-    private LoginDataGetSource dataGetSource;
-    @NonNull
     private GetRemoteBannerData getRemoteBannerData;
     @NonNull
     private GetArticlesData getArticlesData;
-    private CompositeDisposable compositeDisposable;
 
-    public HomePresenter(@NonNull HomeContract.View view, @NonNull LoginDataGetSource loginDataGetSource, @NonNull GetRemoteBannerData getBannerData, @NonNull GetArticlesData articlesData){
+    public HomePresenter(@NonNull HomeContract.View view, @NonNull GetRemoteBannerData getBannerData, @NonNull GetArticlesData articlesData){
         mView = view;
-        dataGetSource = loginDataGetSource;
         getRemoteBannerData = getBannerData;
         getArticlesData =articlesData;
         mView.setPresenter(this);
-        compositeDisposable = new CompositeDisposable();
     }
     @Override
     public void getArticles(int page, boolean forceUpdate, boolean clearCache) {
-        Disposable disposable = getArticlesData.getArticles(page,forceUpdate,clearCache)
+        getArticlesData.getArticles(page,forceUpdate,clearCache)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<ArticleDetailData>>() {
@@ -72,13 +67,12 @@ public class HomePresenter implements HomeContract.Presenter {
                         }
                     }
                 });
-        compositeDisposable.add(disposable);
 
     }
 
     @Override
     public void getBanner() {
-        Disposable disposable = GetRemoteBannerData.getInstance().getBannerData()
+        GetRemoteBannerData.getInstance().getBannerData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<BannerDetailData>>() {
@@ -104,37 +98,35 @@ public class HomePresenter implements HomeContract.Presenter {
                         }
                     }
                 });
-        compositeDisposable.add(disposable);
 
     }
 
     @Override
     public void autoLogin(String userName, String password) {
-        Disposable disposable = LoginDataGetSource.getInstance().getRemoteLoginData(userName, password, null, LoginType.TYPE_LOGIN)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<LoginData>() {
-
-                    @Override
-                    public void onNext(LoginData value) {
-                        if (mView.isActive() && value.getErrorCode() == -1) {
-                            mView.showAutoLoginFail();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (mView.isActive()) {
-                            mView.showAutoLoginFail();
-                        }
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-        compositeDisposable.add(disposable);
+//        LoginDataGetSource.getInstance().getRemoteLoginData(userName, password, null, LoginType.TYPE_LOGIN)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeWith(new DisposableObserver<LoginData>() {
+//
+//                    @Override
+//                    public void onNext(LoginData value) {
+//                        if (mView.isActive() && value.getErrorCode() == -1) {
+//                            mView.showAutoLoginFail();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        if (mView.isActive()) {
+//                            mView.showAutoLoginFail();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
     }
 
     @Override
@@ -144,6 +136,6 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        compositeDisposable.clear();
+
     }
 }

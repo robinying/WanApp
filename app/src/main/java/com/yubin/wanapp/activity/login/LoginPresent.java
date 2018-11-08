@@ -68,6 +68,36 @@ public class LoginPresent implements LoginContract.Presenter {
     }
 
     @Override
+    public void autoLogin(String username, String password, @NonNull LoginType loginType) {
+        Disposable disposable = dataGetSource.getRemoteLoginData(username, password,null, loginType)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<LoginData>() {
+
+                    @Override
+                    public void onNext(LoginData value) {
+                        if (value.getErrorCode()==-1){
+                            mView.showLoginError(value.getErrorMsg());
+                        }else {
+                            mView.showAutoLogin();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.showNetworkError();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+        compositeDisposable.add(disposable);
+    }
+
+    @Override
     public void subscribe() {
 
     }

@@ -2,6 +2,7 @@ package com.yubin.wanapp.activity;
 
 import android.Manifest;
 import android.animation.ArgbEvaluator;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,10 +51,14 @@ public class SplashActivity extends AppCompatActivity {
     private ImageView[] indicators;
     private int[] bgColors;
     private int currentPosition;
-    private String[] permissionArray = new String[]{
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.ACCESS_NETWORK_STATE
-    };
+
+
+    public static void show(Context context) {
+        if (context != null) {
+            context.startActivity(new Intent(context, SplashActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +69,6 @@ public class SplashActivity extends AppCompatActivity {
         if(BasePreference.getBoolean(ConstantUtil.SKIP_SPLASH,false)){
             jumpToLogin();
         }else{
-            checkPermissions();
             SplashFragmentAdapter pageAdapter = new SplashFragmentAdapter(getSupportFragmentManager());
             container.setAdapter(pageAdapter);
             indicators = new ImageView[]{imgIndicator0, imgIndicator1, imgIndicator2};
@@ -131,40 +135,4 @@ public class SplashActivity extends AppCompatActivity {
         finish();
     }
 
-    private void checkPermissions() {
-        if (AndPermission.hasPermission(activityInstance, permissionArray)) {
-        } else {
-            AndPermission.with(activityInstance)
-                    .requestCode(Constant.REQUEST_PERMISSIONS)
-                    .permission(permissionArray)
-                    .callback(new PermissionListener() {
-                        @Override
-                        public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
-                            if (AndPermission.hasPermission(activityInstance, permissionArray)) {
-
-                            }
-                        }
-
-                        @Override
-                        public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
-                            if (AndPermission.hasPermission(activityInstance, permissionArray)) {
-
-                                return;
-                            }
-                            AndPermission.defaultSettingDialog(activityInstance, Constant.REQUEST_PERMISSIONS)
-                                    .setTitle("权限申请失败")
-                                    .setMessage("您已禁用 \"读写手机存储\" 权限，请在设置中授权！")
-                                    .setPositiveButton("好，去设置")
-                                    .show();
-                        }
-                    })
-                    .rationale(new RationaleListener() {
-                        @Override
-                        public void showRequestPermissionRationale(int requestCode, Rationale rationale) {
-                            AndPermission.rationaleDialog(activityInstance, rationale).show();
-                        }
-                    })
-                    .start();
-        }
-    }
 }

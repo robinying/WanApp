@@ -78,25 +78,21 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.e(TAG,"onCreateView");
-        if (mRoot != null) {
-            ViewGroup parent = (ViewGroup) mRoot.getParent();
-            if (parent != null)
-                parent.removeView(mRoot);
-        } else {
-            mRoot = inflater.inflate(getLayoutId(), container, false);
-            mInflater = inflater;
-            // Do something
-            onBindViewBefore(mRoot);
-            // Bind view
-            unbinder = ButterKnife.bind(this, mRoot);
-            // Get savedInstanceState
-            if (savedInstanceState != null)
-                onRestartInstance(savedInstanceState);
-            // Init
-            initView(mRoot);
-            initData();
-            bindEvent();
-        }
+
+        mRoot = inflater.inflate(getLayoutId(), container, false);
+        mInflater = inflater;
+        // Do something
+        onBindViewBefore(mRoot);
+        // Bind view
+        unbinder = ButterKnife.bind(this, mRoot);
+        // Get savedInstanceState
+        if (savedInstanceState != null)
+            onRestartInstance(savedInstanceState);
+        // Init
+        initView(mRoot);
+        initData();
+        bindEvent();
+
         return mRoot;
     }
 
