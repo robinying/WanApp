@@ -85,7 +85,7 @@ public class LauncherActivity extends BaseAppCompatActivity implements LoginCont
             public void onClick(View v) {
                 if (autoLogin) {
                     MainActivity.show(activityInstance);
-                    ToastUtils.showShort(R.string.auto_login_success);
+                    //ToastUtils.showShort(R.string.auto_login_success);
                     finish();
                 } else {
                     if (BasePreference.getBoolean(ConstantUtil.SKIP_SPLASH, false)) {

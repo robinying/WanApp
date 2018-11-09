@@ -27,4 +27,6 @@
     <color name="text_color">#780A0A0A</color>
 
     <color name="colorHeaderBackground">#ebebeb</color>
+
+    <color name="light_gray_eee">#EEEEEE</color>
 </resources>

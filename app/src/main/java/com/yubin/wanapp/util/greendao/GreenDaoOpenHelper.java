@@ -3,7 +3,9 @@ package com.yubin.wanapp.util.greendao;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.yubin.wanapp.data.ArticleDetailDataDao;
 import com.yubin.wanapp.data.DaoMaster;
+import com.yubin.wanapp.data.FavoriteArticleDetailDataDao;
 import com.yubin.wanapp.data.LoginDetailData;
 import com.yubin.wanapp.data.LoginDetailDataDao;
 
@@ -30,6 +32,6 @@ public class GreenDaoOpenHelper extends DaoMaster.OpenHelper {
             public void onDropAllTables(Database db, boolean ifExists) {
                 DaoMaster.dropAllTables(db, ifExists);
             }
-        }, LoginDetailDataDao.class);
+        }, LoginDetailDataDao.class, ArticleDetailDataDao.class, FavoriteArticleDetailDataDao.class);
     }
 }

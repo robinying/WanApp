@@ -10,6 +10,7 @@ import com.yubin.wanapp.data.DaoMaster;
 import com.yubin.wanapp.data.DaoSession;
 import com.yubin.wanapp.util.BasePreference;
 import com.yubin.wanapp.util.ConstantUtil;
+import com.yubin.wanapp.util.ContextUtils;
 import com.yubin.wanapp.util.greendao.GreenDaoOpenHelper;
 
 import org.greenrobot.greendao.database.Database;
@@ -33,6 +34,7 @@ public class App extends Application {
         }else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+        ContextUtils.init(context);
     }
 
     public static App getContext(){

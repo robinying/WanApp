@@ -3,16 +3,17 @@ package com.yubin.wanapp.activity.detail;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -20,14 +21,13 @@ import com.yubin.wanapp.R;
 import com.yubin.wanapp.activity.BaseAppCompatActivity;
 import com.yubin.wanapp.activity.home.OnRecyclerViewItemOnClickListener;
 import com.yubin.wanapp.data.ArticleDetailData;
-import com.yubin.wanapp.data.GuideBean;
 import com.yubin.wanapp.data.model.TagDetailData;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class TagDetailActivity extends BaseAppCompatActivity implements TagDetailContract.View{
+public class TagDetailActivity extends BaseAppCompatActivity implements TagDetailContract.View {
 
     @BindView(R.id.tag_detail_list)
     RecyclerView tagDetailList;
@@ -35,6 +35,8 @@ public class TagDetailActivity extends BaseAppCompatActivity implements TagDetai
     SmartRefreshLayout tagDetailRefresh;
     @BindView(R.id.empty_view)
     LinearLayout emptyView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private LinearLayoutManager layoutManager;
     private TagDetailAdapter adapter;
     private TagDetailContract.Presenter mPresenter;
@@ -44,10 +46,10 @@ public class TagDetailActivity extends BaseAppCompatActivity implements TagDetai
     private int pageCount;
 
 
-    public static void show(Context context,int cid) {
+    public static void show(Context context, int cid) {
         if (context != null) {
             context.startActivity(new Intent(context, TagDetailActivity.class)
-                    .putExtra("cid",cid));
+                    .putExtra("cid", cid));
         }
     }
 
@@ -55,10 +57,10 @@ public class TagDetailActivity extends BaseAppCompatActivity implements TagDetai
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         index = 0;
-        Intent intent =getIntent();
-        cid = intent.getIntExtra("cid",0);
+        Intent intent = getIntent();
+        cid = intent.getIntExtra("cid", 0);
         new TagDetailPresenter(this, TagDetailData.getInstance());
-        mPresenter.getTagDetail(index,cid);
+        mPresenter.getTagDetail(index, cid);
         curPage = index;
     }
 
@@ -69,6 +71,11 @@ public class TagDetailActivity extends BaseAppCompatActivity implements TagDetai
 
     @Override
     public void initView() {
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_back);
+        setTitle(R.string.tag_detail);
         layoutManager = new LinearLayoutManager(activityInstance);
         tagDetailList.setLayoutManager(layoutManager);
         tagDetailList.setVisibility(View.VISIBLE);
@@ -86,15 +93,15 @@ public class TagDetailActivity extends BaseAppCompatActivity implements TagDetai
         tagDetailRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                mPresenter.getTagDetail(index,cid);
+                mPresenter.getTagDetail(index, cid);
                 refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
             }
         });
         tagDetailRefresh.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
-                curPage ++;
-                Log.d("robin","pageCount ="+pageCount);
+                curPage++;
+                Log.d("robin", "pageCount =" + pageCount);
                 if (curPage <= pageCount) {
                     mPresenter.getTagDetail(curPage, cid);
                 }
@@ -105,9 +112,9 @@ public class TagDetailActivity extends BaseAppCompatActivity implements TagDetai
 
     @Override
     public void showTagDetail(final List<ArticleDetailData> list) {
-        if(adapter !=null){
+        if (adapter != null) {
             adapter.updateData(list);
-        }else{
+        } else {
             adapter = new TagDetailAdapter(activityInstance, list);
             adapter.setItemClickListener(new OnRecyclerViewItemOnClickListener() {
                 @Override
@@ -127,7 +134,7 @@ public class TagDetailActivity extends BaseAppCompatActivity implements TagDetai
 
     @Override
     public void showEmptyView(boolean show) {
-        emptyView.setVisibility(show?View.VISIBLE:View.INVISIBLE);
+        emptyView.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -137,6 +144,16 @@ public class TagDetailActivity extends BaseAppCompatActivity implements TagDetai
 
     @Override
     public void setPresenter(TagDetailContract.Presenter presenter) {
-        mPresenter= presenter;
+        mPresenter = presenter;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

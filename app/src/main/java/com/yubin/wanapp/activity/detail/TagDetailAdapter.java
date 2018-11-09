@@ -88,7 +88,5 @@ public class TagDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 }
             });
         }
-
-
     }
 }

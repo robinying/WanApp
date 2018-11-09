@@ -11,4 +11,24 @@
         <attr name="progress_hint_color" format="color"/>
         <attr name="bg_color" format="color|reference"/>
     </declare-styleable>
+
+    <declare-styleable name="ItemView">
+        <attr name="show_img" format="boolean" />
+        <attr name="img_src" format="reference" />
+        <attr name="itemtitle" format="string|reference" />
+        <attr name="show_top_line" format="boolean" />
+        <attr name="show_bottom_line" format="boolean" />
+        <attr name="top_line_margin_left" format="dimension|reference" />
+        <attr name="stub_type_title" format="string|reference" />
+        <attr name="itemhint" format="string|reference" />
+        <attr name="stub_type_title_color" format="color|reference" />
+        <attr name="stub_type">
+            <enum name="val_default" value="0" />
+            <enum name="val_right_arrow" value="2" />
+            <enum name="val_left_arrow" value="3" />
+            <enum name="val_right_no" value="6" />
+            <enum name="val_left_no" value="4" />
+            <enum name="edit" value="5" />
+        </attr>
+    </declare-styleable>
 </resources>

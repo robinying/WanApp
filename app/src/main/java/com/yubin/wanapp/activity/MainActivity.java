@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.FragmentUtils;
 import com.yubin.wanapp.R;
+import com.yubin.wanapp.activity.favourite.FavouriteActivity;
 import com.yubin.wanapp.activity.guide.GuideFragment;
 import com.yubin.wanapp.activity.home.HomeTabFragment;
 import com.yubin.wanapp.activity.login.LoginActivity;
@@ -197,9 +198,11 @@ public class MainActivity extends BaseAppCompatActivity
             }).show();
 
         } else if (id == R.id.nav_settings) {
-
-        } else if (id == R.id.nav_share) {
-
+            SettingsActivity.show(activityInstance);
+        } else if (id == R.id.nav_about) {
+            AboutActivity.show(activityInstance);
+        } else if (id == R.id.nav_favourite) {
+            FavouriteActivity.show(activityInstance);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -207,11 +210,11 @@ public class MainActivity extends BaseAppCompatActivity
         return true;
     }
 
-    private void jumpToLogin() {
-        //登陆成功执行此逻辑
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
+//    private void jumpToLogin() {
+//        //登陆成功执行此逻辑
+//        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
+//        finish();
+//    }
 }

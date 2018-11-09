@@ -6,6 +6,8 @@
     android:background="@drawable/tag_detail_bg"
     android:layout_marginTop="@dimen/activity_margin_half"
     android:layout_marginBottom="@dimen/activity_margin_half"
+    android:layout_marginEnd="@dimen/activity_margin_half"
+    android:layout_marginStart="@dimen/activity_margin_half"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 

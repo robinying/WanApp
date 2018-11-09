@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.yubin.wanapp.R;
 import com.yubin.wanapp.activity.BaseAppCompatActivity;
@@ -17,7 +19,10 @@ import com.yubin.wanapp.activity.detail.DetailActivity;
 import com.yubin.wanapp.activity.detail.TagDetailAdapter;
 import com.yubin.wanapp.activity.home.OnRecyclerViewItemOnClickListener;
 import com.yubin.wanapp.data.ArticleDetailData;
+import com.yubin.wanapp.data.HotkeyData;
 import com.yubin.wanapp.data.model.GetArticlesData;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.List;
@@ -77,6 +82,7 @@ public class SearchActivity extends BaseAppCompatActivity implements SearchContr
                 return true;
             }
         });
+        mPresenter.getHotkey();
     }
 
     @Override
@@ -104,6 +110,29 @@ public class SearchActivity extends BaseAppCompatActivity implements SearchContr
             });
             recyclerView.setAdapter(adapter);
         }
+    }
+
+    @Override
+    public void showHotkey(final List<HotkeyData.HotKeyDetail> list) {
+        flowLayout.setAdapter(new TagAdapter<HotkeyData.HotKeyDetail>(list) {
+            @Override
+            public View getView(FlowLayout parent, int position, HotkeyData.HotKeyDetail hotKeyDetailData) {
+                TextView textView = (TextView) LayoutInflater.from(activityInstance).inflate(R.layout.tfl, flowLayout, false);
+                if (list == null) {
+                    return null;
+                }
+                textView.setText(hotKeyDetailData.getName());
+                flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+                    @Override
+                    public boolean onTagClick(View view, int position, FlowLayout parent) {
+                        //这个逻辑会回调searchView的onQueryTextSubmit方法
+                        searchView.setQuery(list.get(position).getName(),true);
+                        return true;
+                    }
+                });
+                return textView;
+            }
+        });
     }
 
     @Override

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/fav_ll"
+    android:background="@drawable/fav_bg"
+    android:layout_marginTop="@dimen/activity_margin_half"
+    android:layout_marginBottom="@dimen/activity_margin_half"
+    android:layout_marginEnd="@dimen/activity_margin_half"
+    android:layout_marginStart="@dimen/activity_margin_half"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <ImageView
+            android:src="@drawable/ic_author"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:id="@+id/author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/text_color"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            tools:text="鸿洋"
+            />
+
+        <TextView
+            android:id="@+id/chapter_name"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="160dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="集合相关"/>
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/fav_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/text_color"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="14sp"
+        tools:text="Android trace文件抓取原理"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_clock" />
+
+        <TextView
+            android:id="@+id/article_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/text_color"
+            android:textSize="12sp"
+            tools:text="2018-11-9" />
+    </LinearLayout>
+
+</LinearLayout>

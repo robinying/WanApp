@@ -57,4 +57,17 @@
     <string name="uncollect_article_success">取消收藏成功</string>
     <string name="auto_login_success">自动登录成功</string>
     <string name="search_tint">搜索文章</string>
+    <string name="action_about">关于</string>
+    <string name="action_favourite">喜欢的文章</string>
+    <string name="menu">目录</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="clear_cache_success">缓存清理成功</string>
+    <string name="application_name">软件名</string>
+    <string name="application_version">版本号</string>
+    <string name="check_update">检查更新</string>
+    <string name="copy_success">复制成功</string>
+    <string name="update_title">更新版本</string>
+    <string name="tag_detail">标签</string>
+    <string name="fav_title">收藏</string>
+    <string name="updatecontent">1.新版本震撼来袭\n2.链式编程，调用简单\n3.欢迎Star和Issue\n5.github:<a href='https://github.com/robinying'>https://github.com/robinying</a></string>
 </resources>

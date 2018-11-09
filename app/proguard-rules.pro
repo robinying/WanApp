@@ -56,4 +56,10 @@ public static java.lang.String TABLENAME;
 # If you do not use SQLCipher:
 -dontwarn org.greenrobot.greendao.database.**
 
+-keepattributes Annotation
+-keepclassmembers class * {    @org.greenrobot.eventbus.Subscribe ;}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {    (java.lang.Throwable);}
+-keep class com.allenliu.versionchecklib.**{*;}
+
 

@@ -44,7 +44,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.detail.TagDetailActivity" />
-        <activity android:name=".activity.search.SearchActivity"></activity>
+        <activity android:name=".activity.search.SearchActivity" />
+        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.AboutActivity" />
+        <activity android:name=".activity.favourite.FavouriteActivity"></activity>
     </application>
 
 </manifest>
