@@ -99,6 +99,7 @@ public class MainActivity extends BaseAppCompatActivity
                     homeTabFragment.jumpToTop();
                 }
                 if(guideFragment.isActive()){
+                    guideFragment.jumpToTop();
                 }
             }
         });

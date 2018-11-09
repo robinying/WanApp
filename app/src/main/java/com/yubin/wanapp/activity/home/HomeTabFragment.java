@@ -1,11 +1,19 @@
 package com.yubin.wanapp.activity.home;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +28,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
@@ -43,6 +54,7 @@ import butterknife.Unbinder;
 import com.yubin.wanapp.util.GlideLoader;
 import com.yubin.wanapp.util.NetworkUtil;
 
+
 /**
  * author : Yubin.Ying
  * time : 2018/11/5
@@ -50,12 +62,10 @@ import com.yubin.wanapp.util.NetworkUtil;
 public class HomeTabFragment extends BaseFragment implements HomeContract.View{
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
-    @BindView(R.id.nested_scroll_view)
-    NestedScrollView nestedScrollView;
     @BindView(R.id.empty_view)
     LinearLayout emptyView;
     @BindView(R.id.refresh_layout)
-    SwipeRefreshLayout refreshLayout;
+    SmartRefreshLayout refreshLayout;
     private Banner mBanner;
     private ArticlesAdapter adapter;
     private HomeContract.Presenter mPresent;
@@ -126,7 +136,10 @@ public class HomeTabFragment extends BaseFragment implements HomeContract.View{
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setVisibility(View.VISIBLE);
         emptyView.setVisibility(View.INVISIBLE);
-        refreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+        //设置 Header 为 贝塞尔雷达 样式
+        refreshLayout.setRefreshHeader(new BezierRadarHeader(mContext).setEnableHorizontalDrag(true));
+        //设置 Footer 为 球脉冲 样式
+        refreshLayout.setRefreshFooter(new BallPulseFooter(mContext).setSpinnerStyle(SpinnerStyle.Scale));
     }
 
     @Override
@@ -138,20 +151,19 @@ public class HomeTabFragment extends BaseFragment implements HomeContract.View{
     @Override
     protected void bindEvent() {
         super.bindEvent();
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh(RefreshLayout refreshlayout) {
                 currentPage = index;
                 mPresent.getArticles(currentPage,true,false);
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
             }
         });
-        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
-                    loadMore();
-                }
+            public void onLoadMore(RefreshLayout refreshlayout) {
+                loadMore();
+                refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
             }
         });
 
@@ -165,14 +177,6 @@ public class HomeTabFragment extends BaseFragment implements HomeContract.View{
 
     @Override
     public void setLoadingIndicator(final boolean isActive) {
-        if(refreshLayout!=null) {
-            refreshLayout.post(new Runnable() {
-                @Override
-                public void run() {
-                    refreshLayout.setRefreshing(isActive);
-                }
-            });
-        }
     }
 
     @Override
@@ -212,11 +216,11 @@ public class HomeTabFragment extends BaseFragment implements HomeContract.View{
 
     @Override
     public void showEmptyView(boolean toShow) {
-        if(emptyView !=null) {
+        if (emptyView != null) {
             emptyView.setVisibility(toShow ? View.VISIBLE : View.INVISIBLE);
         }
-        if(nestedScrollView !=null) {
-            nestedScrollView.setVisibility(!toShow ? View.VISIBLE : View.INVISIBLE);
+        if (recyclerView != null) {
+            recyclerView.setVisibility(toShow ? View.INVISIBLE : View.VISIBLE);
         }
     }
 
@@ -269,7 +273,9 @@ public class HomeTabFragment extends BaseFragment implements HomeContract.View{
 
     @Override
     public void jumpToTop() {
-        nestedScrollView.scrollTo(0,0);
+        if (recyclerView != null) {
+            recyclerView.scrollToPosition(0);
+        }
     }
 
 

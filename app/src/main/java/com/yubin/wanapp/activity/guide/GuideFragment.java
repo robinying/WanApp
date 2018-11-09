@@ -143,6 +143,12 @@ public class GuideFragment extends BaseFragment implements GuideContract.View {
 
     }
 
+    public void jumpToTop(){
+        if(recyclerviewGuide!=null){
+            recyclerviewGuide.scrollToPosition(0);
+        }
+    }
+
     @Override
     public void setPresenter(GuideContract.Presenter presenter) {
         mPresenter = presenter;
