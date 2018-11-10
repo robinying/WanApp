@@ -6,6 +6,7 @@ import com.yubin.wanapp.data.FavoriteArticlesData;
 import com.yubin.wanapp.data.GuideBean;
 import com.yubin.wanapp.data.HotkeyData;
 import com.yubin.wanapp.data.LoginData;
+import com.yubin.wanapp.data.NaviData;
 import com.yubin.wanapp.data.Status;
 
 import io.reactivex.Observable;
@@ -57,6 +58,9 @@ public interface RetrofitService {
 
     @GET(Api.HOT_KEY)
     Observable<HotkeyData> getHotkey();
+
+    @GET(Api.NAV_TREE)
+    Observable<NaviData> getNavdata();
 
 
 

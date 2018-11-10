@@ -39,10 +39,10 @@ public class SearchPresenter implements SearchContract.Presenter {
                 .subscribe(new DisposableObserver<List<ArticleDetailData>>() {
                     @Override
                     public void onNext(List<ArticleDetailData> value) {
-                        if(value!=null&& value.size()>0) {
+                        if (value != null && value.size() > 0) {
                             mView.showQueryArticles(value);
                             mView.showEmptyView(false);
-                        }else {
+                        } else {
                             mView.showEmptyView(true);
                         }
                     }

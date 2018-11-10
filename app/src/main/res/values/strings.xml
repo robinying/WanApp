@@ -44,6 +44,7 @@
     <string name="empty_text">列表为空</string>
     <string name="home_label">主页</string>
     <string name="guide_label">导航</string>
+    <string name="nav_label">知识体系</string>
     <string name="detail_collect_article">收藏文章</string>
     <string name="detail_copy_the_link">复制链接</string>
     <string name="detail_share">分享</string>

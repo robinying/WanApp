@@ -28,6 +28,7 @@ import com.yubin.wanapp.activity.favourite.FavouriteActivity;
 import com.yubin.wanapp.activity.guide.GuideFragment;
 import com.yubin.wanapp.activity.home.HomeTabFragment;
 import com.yubin.wanapp.activity.login.LoginActivity;
+import com.yubin.wanapp.activity.nav.NavGuideFragment;
 import com.yubin.wanapp.activity.search.SearchActivity;
 import com.yubin.wanapp.data.UserManager;
 import com.yubin.wanapp.util.DialogHelper;
@@ -54,8 +55,9 @@ public class MainActivity extends BaseAppCompatActivity
     private Context mContext;
     private HomeTabFragment homeTabFragment;
     private GuideFragment guideFragment;
+    private NavGuideFragment navGuideFragment;
     private FragmentManager fragmentManager;
-    private Fragment[] mFragments =new Fragment[2];
+    private Fragment[] mFragments =new Fragment[3];
     private int curIndex;
 
 
@@ -72,8 +74,10 @@ public class MainActivity extends BaseAppCompatActivity
         fragmentManager = getSupportFragmentManager();
         homeTabFragment = HomeTabFragment.newInstance();
         guideFragment = GuideFragment.newInstance();
+        navGuideFragment = NavGuideFragment.newInstance();
         mFragments[0] = homeTabFragment;
         mFragments[1] = guideFragment;
+        mFragments[2] = navGuideFragment;
         FragmentUtils.add(getSupportFragmentManager(),mFragments, R.id.frame_layout, curIndex);
         setTitle(R.string.home_label);
 
@@ -135,7 +139,8 @@ public class MainActivity extends BaseAppCompatActivity
                         setTitle(R.string.guide_label);
                         break;
                     case R.id.nav_knowledge:
-
+                        showCurrentFragment(2);
+                        setTitle(R.string.nav_label);
                         break;
                     case R.id.nav_project:
                         break;

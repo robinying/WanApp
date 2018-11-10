@@ -97,6 +97,7 @@ dependencies {
     implementation "com.just.agentweb:agentweb:4.0.2"
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation 'com.allenliu.versionchecklib:library:2.1.1'
+    implementation 'q.rorbin:VerticalTabLayout:1.2.5'
 
 }
 
