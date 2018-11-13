@@ -17,5 +17,6 @@ public interface ProjectContract {
 
     interface View extends BaseView<Presenter>{
         void showProjectList(List<Projecttree.ProjectBean> value);
+        boolean isActive();
     }
 }

@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.yubin.wanapp.data.ArticleDetailData;
 import com.yubin.wanapp.data.model.ProjectDataImpl;
+import com.yubin.wanapp.util.JumpToTopEvent;
+import com.yubin.wanapp.util.RxBus;
 
 import java.util.List;
 
@@ -38,7 +40,6 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("robin","e"+e.toString());
                     }
 
                     @Override
@@ -46,6 +47,12 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
 
                     }
                 });
+    }
+
+    @Override
+    public void registerEvent() {
+        RxBus.getDefault().toFlowable(JumpToTopEvent.class)
+                .subscribe(jumpToTheTopEvent -> mView.jumpTotheTop());
     }
 
     @Override

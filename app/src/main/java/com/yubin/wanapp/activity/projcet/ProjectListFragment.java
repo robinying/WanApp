@@ -50,21 +50,20 @@ public class ProjectListFragment extends BaseFragment implements ProjectListCont
     protected void initBundle(Bundle bundle) {
         super.initBundle(bundle);
         cid = bundle.getInt("cid");
-        Log.d("robin","cid ="+cid);
     }
 
     @Override
     protected void initView(View root) {
         super.initView(root);
         new ProjectListPresenter(this, ProjectDataImpl.getInstance());
-        Log.d("robin","getProjectListData");
         mPresenter.getProjectListData(index, cid);
+        mPresenter.registerEvent();
         layoutManager = new LinearLayoutManager(getContext());
         projectListRecyclerView.setLayoutManager(layoutManager);
         normalView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                mPresenter.getProjectListData(index,cid);
+                mPresenter.getProjectListData(index, cid);
                 refreshLayout.finishRefresh(2000);
             }
         });
@@ -99,38 +98,26 @@ public class ProjectListFragment extends BaseFragment implements ProjectListCont
 
 
     @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
     public void showProjectViewPager(List<ArticleDetailData> value) {
-        if(adapter !=null){
-            adapter.updateData(value);
-        }else{
-            adapter = new ProjectListAdapter(getContext(),value);
-            adapter.setItemClickListener(new OnRecyclerViewItemOnClickListener() {
-                @Override
-                public void onClick(View view, int position) {
-                    Intent intent = new Intent(getContext(), DetailActivity.class);
-                    ArticleDetailData data = value.get(position);
-                    intent.putExtra(DetailActivity.URL, data.getLink());
-                    intent.putExtra(DetailActivity.TITLE, data.getTitle());
-                    intent.putExtra(DetailActivity.ID, data.getId());
-                    startActivity(intent);
-                }
-            });
-            projectListRecyclerView.setAdapter(adapter);
+        adapter = new ProjectListAdapter(getContext(), value);
+        adapter.setItemClickListener(new OnRecyclerViewItemOnClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(getContext(), DetailActivity.class);
+                ArticleDetailData data = value.get(position);
+                intent.putExtra(DetailActivity.URL, data.getLink());
+                intent.putExtra(DetailActivity.TITLE, data.getTitle());
+                intent.putExtra(DetailActivity.ID, data.getId());
+                startActivity(intent);
+            }
+        });
+        projectListRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void jumpTotheTop() {
+        if(projectListRecyclerView!=null){
+            projectListRecyclerView.scrollToPosition(0);
         }
     }
 }

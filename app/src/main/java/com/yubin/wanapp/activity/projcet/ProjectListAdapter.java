@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yubin.wanapp.R;
 import com.yubin.wanapp.activity.detail.TagDetailAdapter;
 import com.yubin.wanapp.activity.home.ArticlesAdapter;
@@ -63,7 +64,10 @@ public class ProjectListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         projectViewHolder.projectTitle.setText(mList.get(position).getTitle());
         projectViewHolder.projectDesc.setText(mList.get(position).getDesc());
         projectViewHolder.timeTv.setText(mList.get(position).getNiceDate());
-        Glide.with(mContext).load(mList.get(position).getEnvelopePic()).into(projectViewHolder.imageView);
+        RequestOptions options = new RequestOptions()
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher);
+        Glide.with(mContext).load(mList.get(position).getEnvelopePic()).apply(options).into(projectViewHolder.imageView);
     }
 
     public void setItemClickListener(OnRecyclerViewItemOnClickListener listener){

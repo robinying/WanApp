@@ -112,6 +112,9 @@ public class MainActivity extends BaseAppCompatActivity
                 if(navGuideFragment.isActive()){
                     navGuideFragment.jumpToTop();
                 }
+                if(projectFragment.isActive()){
+                    projectFragment.jumpToTheTop();
+                }
 
             }
         });

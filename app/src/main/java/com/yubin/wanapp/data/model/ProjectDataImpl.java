@@ -76,7 +76,6 @@ public class ProjectDataImpl {
                         }).toObservable().doOnNext(new Consumer<List<ArticleDetailData>>() {
                             @Override
                             public void accept(List<ArticleDetailData> list) throws Exception {
-                                Log.d("robin","list ="+list);
                             }
                         });
                     }

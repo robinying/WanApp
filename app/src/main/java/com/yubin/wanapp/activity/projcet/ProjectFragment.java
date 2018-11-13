@@ -14,6 +14,8 @@ import com.yubin.wanapp.R;
 import com.yubin.wanapp.activity.BaseFragment;
 import com.yubin.wanapp.data.Projecttree;
 import com.yubin.wanapp.data.model.ProjectDataImpl;
+import com.yubin.wanapp.util.JumpToTopEvent;
+import com.yubin.wanapp.util.RxBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,6 +129,11 @@ public class ProjectFragment extends BaseFragment implements ProjectContract.Vie
     }
 
     @Override
+    public boolean isActive() {
+        return isAdded() && isResumed();
+    }
+
+    @Override
     public void initViews(View view) {
 
     }
@@ -134,6 +141,12 @@ public class ProjectFragment extends BaseFragment implements ProjectContract.Vie
     @Override
     public void setPresenter(ProjectContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    public void jumpToTheTop() {
+        if (mFragments != null) {
+            RxBus.getDefault().post(new JumpToTopEvent());
+        }
     }
 
 }

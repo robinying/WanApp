@@ -13,9 +13,11 @@ import java.util.List;
 public interface ProjectListContract {
     interface Presenter extends BasePresenter{
         void getProjectListData(int page, int cid);
+        void registerEvent();
     }
 
     interface View extends BaseView<Presenter>{
         void showProjectViewPager(List<ArticleDetailData> value);
+        void jumpTotheTop();
     }
 }
