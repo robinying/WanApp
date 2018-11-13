@@ -24,7 +24,7 @@
             android:id="@+id/author_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:textColor="@color/text_color"
             android:layout_gravity="center_vertical"
             android:textSize="16sp"
@@ -34,10 +34,10 @@
         <TextView
             android:id="@+id/chapter_name"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="160dp"
+            android:layout_marginStart="140dp"
+            android:maxLines="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="集合相关"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 

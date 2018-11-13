@@ -18,7 +18,7 @@
             android:id="@+id/navigation_tab_layout"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:background="@color/gray"
+            android:background="@color/transparent_black"
             app:tab_height="50dp"
             app:indicator_color="@color/white"
             app:indicator_gravity="fill"
@@ -35,6 +35,7 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/navigation_RecyclerView"
+            android:background="@android:color/background_light"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

@@ -34,4 +34,9 @@
 
     <color name="shallow_green">#FF36BC9B</color>
     <color name="shallow_grey">#FF757575</color>
+    <color name="colorCard">#FFFFFF</color>
+
+    <color name="light_red">#e26d2e</color>
+    <color name="light_deep_red">#f9382a</color>
+    <color name="deep_red">#dc3b1f</color>
 </resources>

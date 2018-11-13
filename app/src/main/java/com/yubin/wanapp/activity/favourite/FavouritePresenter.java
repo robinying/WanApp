@@ -43,7 +43,7 @@ public class FavouritePresenter implements FavouriteContract.Presenter {
                 .filter(new Predicate<FavoriteArticlesData>() {
                     @Override
                     public boolean test(FavoriteArticlesData favoriteArticlesData) throws Exception {
-                        return favoriteArticlesData.getErrorCode()!=-1;
+                        return favoriteArticlesData.getErrorCode() == 0;
                     }
                 })
                 .flatMap(new Function<FavoriteArticlesData, ObservableSource<List<FavoriteArticleDetailData>>>() {
@@ -58,7 +58,7 @@ public class FavouritePresenter implements FavouriteContract.Presenter {
                             @Override
                             public void accept(List<FavoriteArticleDetailData> list) throws Exception {
                                 for (FavoriteArticleDetailData item : list) {
-                                    favDao.insertOrReplaceInTx(item);
+                                    favDao.insertOrReplace(item);
                                 }
                             }
                         });

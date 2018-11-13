@@ -26,6 +26,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.just.agentweb.AgentWeb;
 import com.yubin.wanapp.R;
 import com.yubin.wanapp.activity.BaseFragment;
+import com.yubin.wanapp.data.FavoriteArticleDetailDataDao;
 import com.yubin.wanapp.data.UserManager;
 import com.yubin.wanapp.data.model.FavoriteArticleDataImpl;
 
@@ -39,7 +40,7 @@ public class WebviewFragment extends BaseFragment implements DetailContract.View
     private Toolbar toolbar;
     private String url;
     private String title;
-    private int id;
+    private long id;
     private int userId;
 
     private AgentWeb agentWeb;
@@ -78,10 +79,11 @@ public class WebviewFragment extends BaseFragment implements DetailContract.View
         Intent intent = getActivity().getIntent();
         url = intent.getStringExtra(DetailActivity.URL);
         title = intent.getStringExtra(DetailActivity.TITLE);
-        id = intent.getIntExtra(DetailActivity.ID, -1);
+        id = intent.getLongExtra(DetailActivity.ID, -1);
         userId = UserManager.getUserManager().getUserId();
         loadUrl(url);
         new DetailPresenter(this, FavoriteArticleDataImpl.getInstance());
+        mPresenter.updateFavArticle();
 
     }
 
@@ -151,7 +153,9 @@ public class WebviewFragment extends BaseFragment implements DetailContract.View
                 offDrawable.setBounds(0, 0, offDrawable.getMinimumWidth(), offDrawable.getMinimumHeight()); //设置边界
                 Drawable onDrawable = getResources().getDrawable(R.drawable.ic_star_on);
                 onDrawable.setBounds(0, 0, offDrawable.getMinimumWidth(), offDrawable.getMinimumHeight()); //设置边界
+                favorite = UserManager.getUserManager().isFavorite(id);
                 tvFavorite.setCompoundDrawables(favorite ? onDrawable : offDrawable, null, null, null);
+                tvFavorite.setText(favorite ? R.string.detail_uncollect_article:R.string.detail_collect_article);
                 tvFavorite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -226,18 +230,24 @@ public class WebviewFragment extends BaseFragment implements DetailContract.View
 
     @Override
     public void showCollectStatus(boolean isSuccess) {
+        if(isSuccess){
+            mPresenter.updateFavArticle();
+        }
         ToastUtils.showShort(isSuccess ? R.string.collect_article_success : R.string.collect_article_error);
     }
 
     @Override
     public void showUnCollectStatus(boolean isSuccess) {
+        if (isSuccess) {
+            UserManager.getUserManager().deleteFav(id);
+        }
         ToastUtils.showShort(isSuccess ? R.string.uncollect_article_success : R.string.uncollect_article_error);
 
     }
 
     @Override
     public boolean isActive() {
-        return false;
+        return isResumed();
     }
 
     @Override

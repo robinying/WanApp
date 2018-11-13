@@ -19,5 +19,6 @@ public interface NavContract {
     interface  View extends BaseView<Presenter>{
         void showNavData(List<NaviData.NaviBean> list);
         void showEmptyView(boolean show);
+        boolean isActive();
     }
 }

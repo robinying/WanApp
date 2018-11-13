@@ -38,6 +38,7 @@ import com.youth.banner.loader.ImageLoader;
 import com.yubin.wanapp.R;
 import com.yubin.wanapp.activity.BaseFragment;
 import com.yubin.wanapp.activity.detail.DetailActivity;
+import com.yubin.wanapp.activity.detail.TagDetailActivity;
 import com.yubin.wanapp.data.ArticleDetailData;
 import com.yubin.wanapp.data.BannerDetailData;
 import com.yubin.wanapp.data.model.GetArticlesData;
@@ -188,14 +189,12 @@ public class HomeTabFragment extends BaseFragment implements HomeContract.View{
             adapter.setCategoryListener(new OnCategoryOnClickListener() {
                 @Override
                 public void onClick(View view, int position) {
-//                    Intent intent = new Intent(getContext(), CategoryActivity.class);
-//                    ArticleDetailData data = list.get(position);
-//                    if (data.getChapterName().isEmpty()) {
-//                        return;
-//                    }
-//                    intent.putExtra(CategoryActivity.CATEGORY_ID, data.getChapterId());
-//                    intent.putExtra(CategoryActivity.CATEGORY_NAME, data.getChapterName());
-//                    startActivity(intent);
+                    ArticleDetailData data = list.get(position);
+                    if (data.getChapterName().isEmpty()) {
+                        return;
+                    }
+                    TagDetailActivity.show(getContext(),data.getChapterId(),data.getChapterName());
+
                 }
             });
             adapter.setItemClickListener(new OnRecyclerViewItemOnClickListener() {

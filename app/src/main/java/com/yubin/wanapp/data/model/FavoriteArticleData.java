@@ -12,7 +12,7 @@ import retrofit2.http.Path;
  * time : 2018/11/6
  */
 public interface FavoriteArticleData {
-    Observable<Status> collectArticle(@NonNull int userId, @NonNull int id);
+    Observable<Status> collectArticle(@NonNull int userId, @NonNull long id);
 
-    Observable<Status> uncollectArticle(@NonNull int userId, @NonNull int originId);
+    Observable<Status> uncollectArticle(@NonNull int userId, @NonNull long originId);
 }

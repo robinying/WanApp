@@ -7,6 +7,8 @@ import com.yubin.wanapp.data.GuideBean;
 import com.yubin.wanapp.data.HotkeyData;
 import com.yubin.wanapp.data.LoginData;
 import com.yubin.wanapp.data.NaviData;
+import com.yubin.wanapp.data.ProjcetListData;
+import com.yubin.wanapp.data.Projecttree;
 import com.yubin.wanapp.data.Status;
 
 import io.reactivex.Observable;
@@ -44,10 +46,10 @@ public interface RetrofitService {
     Observable<ArticleData> getArticlesFromCatgory(@Path("page") int page, @Query("cid") int cid);
 
     @POST(Api.COLLECT_ARTICLE+"{id}/json")
-    Observable<Status> collectArticle(@Path("id") int id);
+    Observable<Status> collectArticle(@Path("id") long id);
 
     @POST(Api.CANCEL_COLLECTING_ARTICLE + "{originId}/json")
-    Observable<Status> uncollectArticle(@Path("originId") int originId);
+    Observable<Status> uncollectArticle(@Path("originId") long originId);
 
     //获取收藏文章的列表
     @GET(Api.GET_FAVORITE_ARTICLES + "{page}/json")
@@ -62,6 +64,11 @@ public interface RetrofitService {
     @GET(Api.NAV_TREE)
     Observable<NaviData> getNavdata();
 
+    @GET(Api.PROJECT_TREE)
+    Observable<Projecttree> getProjectData();
+
+    @GET(Api.ARTICLE_LIST + "{page}/json")
+    Observable<ArticleData> getArticlesFromProject(@Path("page") int page, @Query("cid") int cid);
 
 
 

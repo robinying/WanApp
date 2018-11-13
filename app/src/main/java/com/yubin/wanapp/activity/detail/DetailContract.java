@@ -9,9 +9,12 @@ import com.yubin.wanapp.mvp.BaseView;
  */
 public interface DetailContract {
     interface Presenter extends BasePresenter {
-        void collectArticle(int userId, int originId);
+        void collectArticle(int userId, long originId);
 
-        void uncollectArticle(int userId, int originId);
+        void uncollectArticle(int userId, long originId);
+
+        void updateFavArticle();
+
     }
 
     interface View extends BaseView<Presenter> {

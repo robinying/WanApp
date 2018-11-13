@@ -45,4 +45,6 @@ public class Api {
     public static final String GUIDE_TREE = API_BASE + "tree/json";
 
     public static final String NAV_TREE = API_BASE + "navi/json";
+
+    public static final String PROJECT_TREE = API_BASE +"project/tree/json";
 }

@@ -46,6 +46,7 @@
     <string name="guide_label">导航</string>
     <string name="nav_label">知识体系</string>
     <string name="detail_collect_article">收藏文章</string>
+    <string name="detail_uncollect_article">取消收藏文章</string>
     <string name="detail_copy_the_link">复制链接</string>
     <string name="detail_share">分享</string>
     <string name="detail_open_in_system_browser">在浏览器中打开</string>

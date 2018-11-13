@@ -41,15 +41,17 @@ public class TagDetailActivity extends BaseAppCompatActivity implements TagDetai
     private TagDetailAdapter adapter;
     private TagDetailContract.Presenter mPresenter;
     private int cid;
+    private String chapter_name;
     private int curPage;
     private int index;
     private int pageCount;
 
 
-    public static void show(Context context, int cid) {
+    public static void show(Context context, int cid,String chapterName) {
         if (context != null) {
             context.startActivity(new Intent(context, TagDetailActivity.class)
-                    .putExtra("cid", cid));
+                    .putExtra("cid", cid)
+                    .putExtra("chapterName",chapterName));
         }
     }
 
@@ -59,6 +61,8 @@ public class TagDetailActivity extends BaseAppCompatActivity implements TagDetai
         index = 0;
         Intent intent = getIntent();
         cid = intent.getIntExtra("cid", 0);
+        chapter_name = intent.getStringExtra("chapterName");
+        setTitle(chapter_name);
         new TagDetailPresenter(this, TagDetailData.getInstance());
         mPresenter.getTagDetail(index, cid);
         curPage = index;
@@ -101,7 +105,6 @@ public class TagDetailActivity extends BaseAppCompatActivity implements TagDetai
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
                 curPage++;
-                Log.d("robin", "pageCount =" + pageCount);
                 if (curPage <= pageCount) {
                     mPresenter.getTagDetail(curPage, cid);
                 }

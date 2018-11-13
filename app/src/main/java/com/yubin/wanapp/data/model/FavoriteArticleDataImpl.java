@@ -31,7 +31,7 @@ public class FavoriteArticleDataImpl implements FavoriteArticleData {
     }
 
     @Override
-    public Observable<Status> collectArticle(@NonNull int userId, @NonNull int id) {
+    public Observable<Status> collectArticle(@NonNull int userId, @NonNull long id) {
         return RetrofitClient.getInstance()
                 .create(RetrofitService.class)
                 .collectArticle(id)
@@ -49,7 +49,7 @@ public class FavoriteArticleDataImpl implements FavoriteArticleData {
     }
 
     @Override
-    public Observable<Status> uncollectArticle(@NonNull int userId, @NonNull int originId) {
+    public Observable<Status> uncollectArticle(@NonNull int userId, @NonNull long originId) {
         return RetrofitClient.getInstance()
                 .create(RetrofitService.class)
                 .uncollectArticle(originId)

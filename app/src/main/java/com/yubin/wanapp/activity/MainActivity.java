@@ -29,6 +29,7 @@ import com.yubin.wanapp.activity.guide.GuideFragment;
 import com.yubin.wanapp.activity.home.HomeTabFragment;
 import com.yubin.wanapp.activity.login.LoginActivity;
 import com.yubin.wanapp.activity.nav.NavGuideFragment;
+import com.yubin.wanapp.activity.projcet.ProjectFragment;
 import com.yubin.wanapp.activity.search.SearchActivity;
 import com.yubin.wanapp.data.UserManager;
 import com.yubin.wanapp.util.DialogHelper;
@@ -56,8 +57,9 @@ public class MainActivity extends BaseAppCompatActivity
     private HomeTabFragment homeTabFragment;
     private GuideFragment guideFragment;
     private NavGuideFragment navGuideFragment;
+    private ProjectFragment projectFragment;
     private FragmentManager fragmentManager;
-    private Fragment[] mFragments =new Fragment[3];
+    private Fragment[] mFragments =new Fragment[4];
     private int curIndex;
 
 
@@ -75,9 +77,11 @@ public class MainActivity extends BaseAppCompatActivity
         homeTabFragment = HomeTabFragment.newInstance();
         guideFragment = GuideFragment.newInstance();
         navGuideFragment = NavGuideFragment.newInstance();
+        projectFragment = ProjectFragment.newInstance();
         mFragments[0] = homeTabFragment;
         mFragments[1] = guideFragment;
         mFragments[2] = navGuideFragment;
+        mFragments[3]= projectFragment;
         FragmentUtils.add(getSupportFragmentManager(),mFragments, R.id.frame_layout, curIndex);
         setTitle(R.string.home_label);
 
@@ -105,6 +109,10 @@ public class MainActivity extends BaseAppCompatActivity
                 if(guideFragment.isActive()){
                     guideFragment.jumpToTop();
                 }
+                if(navGuideFragment.isActive()){
+                    navGuideFragment.jumpToTop();
+                }
+
             }
         });
 
@@ -143,6 +151,8 @@ public class MainActivity extends BaseAppCompatActivity
                         setTitle(R.string.nav_label);
                         break;
                     case R.id.nav_project:
+                        showCurrentFragment(3);
+                        setTitle(R.string.nav_project);
                         break;
                 }
                 return true;

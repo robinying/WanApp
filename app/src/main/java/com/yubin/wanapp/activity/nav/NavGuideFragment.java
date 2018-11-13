@@ -42,6 +42,9 @@ public class NavGuideFragment extends BaseFragment implements NavContract.View {
     private NavContract.Presenter mPresent;
     private NaviAdapter adapter;
     private LinearLayoutManager layoutManager;
+    private boolean needScroll;
+    private int index;
+    private boolean isClickTab;
 
     public static NavGuideFragment newInstance() {
         return new NavGuideFragment();
@@ -123,11 +126,126 @@ public class NavGuideFragment extends BaseFragment implements NavContract.View {
             adapter = new NaviAdapter(getContext(),list);
             navigationRecyclerView.setAdapter(adapter);
         }
+        leftRightLinkage();
     }
 
     @Override
     public void showEmptyView(boolean show) {
 
+    }
+
+    @Override
+    public boolean isActive() {
+        return isAdded() && isResumed();
+    }
+
+
+    /**
+     * Left tabLayout and right recyclerView linkage
+     */
+    private void leftRightLinkage() {
+        navigationRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (needScroll && (newState == RecyclerView.SCROLL_STATE_IDLE)) {
+                    scrollRecyclerView();
+                }
+                rightLinkageLeft(newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (needScroll) {
+                    scrollRecyclerView();
+                }
+            }
+        });
+
+        navigationTabLayout.addOnTabSelectedListener(new VerticalTabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabView tabView, int i) {
+                isClickTab = true;
+                selectTag(i);
+            }
+
+            @Override
+            public void onTabReselected(TabView tabView, int i) {
+            }
+        });
+    }
+
+    private void scrollRecyclerView() {
+        needScroll = false;
+        int indexDistance = index - layoutManager.findFirstVisibleItemPosition();
+        if (indexDistance >= 0 && indexDistance < navigationRecyclerView.getChildCount()) {
+            int top = navigationRecyclerView.getChildAt(indexDistance).getTop();
+            navigationRecyclerView.smoothScrollBy(0, top);
+        }
+    }
+
+    /**
+     * Right recyclerView linkage left tabLayout
+     * SCROLL_STATE_IDLE just call once
+     *
+     * @param newState RecyclerView new scroll state
+     */
+    private void rightLinkageLeft(int newState) {
+        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+            if (isClickTab) {
+                isClickTab = false;
+                return;
+            }
+            int firstPosition = layoutManager.findFirstVisibleItemPosition();
+            if (index != firstPosition) {
+                index = firstPosition;
+                setChecked(index);
+            }
+        }
+    }
+
+    private void selectTag(int i) {
+        index = i;
+        navigationRecyclerView.stopScroll();
+        smoothScrollToPosition(i);
+    }
+
+    /**
+     * Smooth right to select the position of the left tab
+     *
+     * @param position checked position
+     */
+    private void setChecked(int position) {
+        if (isClickTab) {
+            isClickTab = false;
+        } else {
+            if (navigationTabLayout == null) {
+                return;
+            }
+            navigationTabLayout.setTabSelected(index);
+        }
+        index = position;
+    }
+
+    private void smoothScrollToPosition(int currentPosition) {
+        int firstPosition = layoutManager.findFirstVisibleItemPosition();
+        int lastPosition = layoutManager.findLastVisibleItemPosition();
+        if (currentPosition <= firstPosition) {
+            navigationRecyclerView.smoothScrollToPosition(currentPosition);
+        } else if (currentPosition <= lastPosition) {
+            int top = navigationRecyclerView.getChildAt(currentPosition - firstPosition).getTop();
+            navigationRecyclerView.smoothScrollBy(0, top);
+        } else {
+            navigationRecyclerView.smoothScrollToPosition(currentPosition);
+            needScroll = true;
+        }
+    }
+
+    public void jumpToTop(){
+        if (navigationTabLayout != null) {
+            navigationTabLayout.setTabSelected(0);
+        }
     }
 
 

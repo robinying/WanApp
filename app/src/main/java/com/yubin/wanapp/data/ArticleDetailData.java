@@ -74,7 +74,7 @@ public class ArticleDetailData {
     private boolean fresh;
     @Expose
     @SerializedName("id")
-    private int id;
+    private long id;
     @Expose
     @SerializedName("link")
     private String link;
@@ -127,13 +127,13 @@ public class ArticleDetailData {
     @Expose
     private int currentPage;
 
-    @Generated(hash = 1257434211)
+    @Generated(hash = 384659573)
     public ArticleDetailData(String apkLink, String author, int chapterId,
             String chapterName, boolean collect, int courseId, String desc,
-            String envelopePic, boolean fresh, int id, String link, String niceDate,
-            String origin, String projectLink, long publishTime, int superChapterId,
-            String superChapterName, String title, int type, int userId,
-            int visible, int zan, int currentPage) {
+            String envelopePic, boolean fresh, long id, String link,
+            String niceDate, String origin, String projectLink, long publishTime,
+            int superChapterId, String superChapterName, String title, int type,
+            int userId, int visible, int zan, int currentPage) {
         this.apkLink = apkLink;
         this.author = author;
         this.chapterId = chapterId;
@@ -235,11 +235,11 @@ public class ArticleDetailData {
         this.fresh = fresh;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

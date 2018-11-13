@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Unique;
 
 /**
  * author : Yubin.Ying
@@ -32,8 +34,9 @@ public class FavoriteArticleDetailData {
     private String niceDate;
     @SerializedName("origin")
     private String origin;
+    @Id
     @SerializedName("originId")
-    private int originId;
+    private long originId;
     @SerializedName("publishTime")
     private long publishTime;
     @SerializedName("title")
@@ -45,10 +48,10 @@ public class FavoriteArticleDetailData {
     @SerializedName("zan")
     private int zan;
 
-    @Generated(hash = 1552691282)
+    @Generated(hash = 607791700)
     public FavoriteArticleDetailData(String author, int chapterId,
             String chapterName, int courseId, String desc, String envelopePic,
-            int id, String link, String niceDate, String origin, int originId,
+            int id, String link, String niceDate, String origin, long originId,
             long publishTime, String title, int userId, int visible, int zan) {
         this.author = author;
         this.chapterId = chapterId;
@@ -152,11 +155,11 @@ public class FavoriteArticleDetailData {
         this.origin = origin;
     }
 
-    public int getOriginId() {
+    public long getOriginId() {
         return originId;
     }
 
-    public void setOriginId(int originId) {
+    public void setOriginId(long originId) {
         this.originId = originId;
     }
 

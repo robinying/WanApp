@@ -83,7 +83,7 @@ public class GuideAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         guideViewHolder.tagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-                TagDetailActivity.show(context.getApplicationContext(),children.getChildren().get(position).getId());
+                TagDetailActivity.show(context.getApplicationContext(),children.getChildren().get(position).getId(),children.getChildren().get(position).getName());
                 return true;
             }
         });

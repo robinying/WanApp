@@ -112,7 +112,7 @@ public class FavouriteActivity extends BaseAppCompatActivity implements Favourit
                     FavoriteArticleDetailData data = list.get(position);
                     intent.putExtra(DetailActivity.URL, data.getLink());
                     intent.putExtra(DetailActivity.TITLE, data.getTitle());
-                    intent.putExtra(DetailActivity.ID, data.getId());
+                    intent.putExtra(DetailActivity.ID, data.getOriginId());
                     startActivity(intent);
                 }
             });

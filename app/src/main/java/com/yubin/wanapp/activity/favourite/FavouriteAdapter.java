@@ -53,7 +53,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         favViewHolder.authorName.setText(mList.get(position).getAuthor());
         favViewHolder.title.setText(mList.get(position).getTitle());
         favViewHolder.articleTime.setText(mList.get(position).getNiceDate());
-        favViewHolder.chapterName.setText(mList.get(position).getChapterName());
+        favViewHolder.chapterName.setText(mList.get(position).getChapterName().trim());
 
     }
 

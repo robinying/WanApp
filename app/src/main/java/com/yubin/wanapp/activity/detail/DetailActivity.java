@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 
 import com.yubin.wanapp.R;
 import com.yubin.wanapp.activity.BaseAppCompatActivity;
+import com.yubin.wanapp.data.FavoriteArticleDetailDataDao;
 
 import butterknife.BindView;
 
