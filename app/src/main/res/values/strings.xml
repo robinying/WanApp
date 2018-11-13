@@ -72,4 +72,5 @@
     <string name="tag_detail">标签</string>
     <string name="fav_title">收藏</string>
     <string name="updatecontent">1.新版本震撼来袭\n2.链式编程，调用简单\n3.欢迎Star和Issue\n5.github:<a href='https://github.com/robinying'>https://github.com/robinying</a></string>
+    <string name="about_code">应用代码github:<a href='https://github.com/robinying/WanApp'>https://github.com/robinying/WanApp</a></string>
 </resources>

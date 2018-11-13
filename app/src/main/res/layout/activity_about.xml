@@ -50,4 +50,30 @@
         app:stub_type="val_right_no"
         app:itemtitle="@string/check_update"/>
 
+    <LinearLayout
+        android:id="@+id/github_ll"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_marginTop="12dp"
+        android:layout_height="150dp">
+
+        <ImageView
+            android:id="@+id/github_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_github" />
+        <TextView
+            android:id="@+id/github_tv"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/about_code"/>
+
+    </LinearLayout>
+
+
+
+
 </LinearLayout>

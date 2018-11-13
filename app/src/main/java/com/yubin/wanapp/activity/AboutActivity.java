@@ -7,6 +7,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.allenliu.versionchecklib.callback.APKDownloadListener;
 import com.allenliu.versionchecklib.v2.AllenVersionChecker;
@@ -16,18 +21,17 @@ import com.allenliu.versionchecklib.v2.callback.CustomVersionDialogListener;
 import com.allenliu.versionchecklib.v2.callback.RequestVersionListener;
 import com.blankj.utilcode.util.ToastUtils;
 import com.yubin.wanapp.R;
+import com.yubin.wanapp.activity.detail.DetailActivity;
+import com.yubin.wanapp.data.ArticleDetailData;
 import com.yubin.wanapp.util.TDevice;
 import com.yubin.wanapp.view.BaseDialog;
 import com.yubin.wanapp.view.ItemView;
 
+import java.io.File;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.File;
 
 public class AboutActivity extends BaseAppCompatActivity {
 
@@ -39,6 +43,12 @@ public class AboutActivity extends BaseAppCompatActivity {
     ItemView appVersion;
     @BindView(R.id.app_update)
     ItemView appUpdate;
+    @BindView(R.id.github_iv)
+    ImageView githubIv;
+    @BindView(R.id.github_tv)
+    TextView githubTv;
+    @BindView(R.id.github_ll)
+    LinearLayout githubLl;
     private DownloadBuilder builder;
 
     public static void show(Context context) {
@@ -70,11 +80,18 @@ public class AboutActivity extends BaseAppCompatActivity {
     }
 
 
-    @OnClick(R.id.app_update)
+    @OnClick({R.id.app_update,R.id.github_ll})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.app_update:
                 checkUpdate();
+                break;
+            case R.id.github_ll:
+                Intent intent = new Intent(activityInstance, DetailActivity.class);
+                intent.putExtra(DetailActivity.URL, "https://github.com/robinying/WanApp");
+                intent.putExtra(DetailActivity.TITLE, getResources().getString(R.string.app_name));
+                intent.putExtra(DetailActivity.ID, -1);
+                startActivity(intent);
                 break;
         }
     }
@@ -89,7 +106,7 @@ public class AboutActivity extends BaseAppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void checkUpdate(){
+    private void checkUpdate() {
         builder = AllenVersionChecker
                 .getInstance()
                 .requestVersion()
@@ -151,4 +168,5 @@ public class AboutActivity extends BaseAppCompatActivity {
         uiData.setContent(getString(R.string.updatecontent));
         return uiData;
     }
+
 }

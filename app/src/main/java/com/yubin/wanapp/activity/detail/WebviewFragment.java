@@ -149,6 +149,9 @@ public class WebviewFragment extends BaseFragment implements DetailContract.View
                 bottomSheetDialog.setContentView(view);
                 bottomSheetDialog.show();
                 AppCompatTextView tvFavorite = (AppCompatTextView)view.findViewById(R.id.text_view_favorite);
+                if (id == -1) {
+                    tvFavorite.setVisibility(View.GONE);
+                }
                 Drawable offDrawable = getResources().getDrawable(R.drawable.ic_star_off);
                 offDrawable.setBounds(0, 0, offDrawable.getMinimumWidth(), offDrawable.getMinimumHeight()); //设置边界
                 Drawable onDrawable = getResources().getDrawable(R.drawable.ic_star_on);
