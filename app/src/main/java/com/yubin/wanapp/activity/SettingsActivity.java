@@ -5,11 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.yubin.wanapp.R;
+import com.yubin.wanapp.mvp.BasePresenter;
+import com.yubin.wanapp.util.BasePreference;
+import com.yubin.wanapp.util.ConstantUtil;
 import com.yubin.wanapp.view.ItemView;
 
 import butterknife.BindView;
@@ -75,4 +81,5 @@ public class SettingsActivity extends BaseAppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

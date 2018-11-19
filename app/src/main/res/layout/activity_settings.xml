@@ -32,5 +32,5 @@
         app:show_bottom_line="true"
         app:show_top_line="true"
         />
-
+    
 </LinearLayout>

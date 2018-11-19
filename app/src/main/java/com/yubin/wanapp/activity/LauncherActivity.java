@@ -3,6 +3,7 @@ package com.yubin.wanapp.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -56,7 +57,9 @@ public class LauncherActivity extends BaseAppCompatActivity implements LoginCont
     protected void initView() {
         super.initView();
         new LoginPresent(this, LoginDataGetSource.getInstance());
-        checkPermissions();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            checkPermissions();
+        }
     }
 
     @Override
